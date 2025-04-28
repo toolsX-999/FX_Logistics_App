@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>FX User</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/admin-dashboard.css">
+
+    <link rel="stylesheet" href="/DataTables/dataTables2.2.2.css" />
+    <script src="/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+
+  </head>
+    <body>
+        <!-- Top Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container-fluid ps-0 offcanvas-container">
+                <!-- offcanvas trigger -->
+                <button class="navbar-toggler ms-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- offcanvas trigger -->
+                 <!-- Brand logo -->
+                <a class="navbar-brand me-auto p-0" href="#">
+                    <svg width="160" height="30" viewBox="0 0 250 60" xmlns="http://www.w3.org/2000/svg">
+                        <text x="0" y="55" font-family="Montserrat, sans-serif" font-size="50" font-weight="700" fill="#E3000F">
+                            F
+                        </text>
+                        <g transform="translate(20, 5)">
+                            <line x1="-10" y1="65" x2="80" y2="-15" stroke="#E3000F" stroke-width="8" stroke-linecap="round" />
+                            <line x1="10" y1="10" x2="50" y2="50" stroke="#E3000F" stroke-width="8" stroke-linecap="round" />
+                        </g>
+                    </svg>
+                </a>             
+                 <!--Brand logo  -->
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="d-flex ms-auto">
+                    <div class="input-group ms-1 me-sm-2 my-2">
+                        <input type="text" class="form-control" placeholder="Search ..." aria-label="Search ..." aria-describedby="button-addon2">
+                        <button class="btn btn-primary" type="button" id="button-addon2"><span>
+                            <i class="fas fa-search"></i>
+                        </span></button>
+                      </div>                
+                </form>
+                <ul class="navbar-nav ms-2 mb-2 mb-lg-0">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span><i class="fas fa-user-alt"></i></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#">My Profile</a></li>
+                      <li><a class="dropdown-item" href="#">Account Settings</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Logout</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <!-- Top Navbar -->
+
+          <!-- Side Navbar Offcanvas -->
+          <!-- Setting data-bs-backdrop="false" prevents overlay effect on page when offcanvas is clicked -->
+          <div class="offcanvas offcanvas-start side-navbar mt-lg-2 bg-dark text-white" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" data-bs-backdrop="false">
+            <!-- <div class="offcanvas-header"> -->
+              <!-- <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5> -->
+              <!-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div> -->
+            <div class="offcanvas-body p-0">
+                <nav class="navbar-dark">
+                    <ul class="navbar-nav">
+                        <li class="d-flex justify-content-between">
+                            <div class="text-secondary small fw-bold text-uppercase px-3 pb-2 align-content-center">CORE</div>
+                            <div class="offcanvas-header close-canvas">
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="/user/dashboard" class="text-decoration-none text-white active px-3">
+                                <span class="me-2">
+                                    <i class="fas fa-dashboard"></i>
+                                </span>
+                                <span>
+                                    Dashboard
+                                </span>
+                            </a>
+                        </li>
+                        <li class="my-4">
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <div class="text-secondary small fw-bold text-uppercase px-3">MANAGEMENT</div>
+                        </li>
+                        <!-- <li>
+                            <a class="nav-link side-navbar-link px-3" href="/admin/dashboard/users" role="button" aria-expanded="false" aria-controls="collapseExample">
+                               <span><i class="fas fa-users me-2"></i></span>
+                               <span>Users</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link side-navbar-link px-3" href="/admin/dashboard/orders" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <span><i class="fas fa-shopping-basket me-2"></i></span>
+                                <span>Orders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link side-navbar-link px-3" href="#" role="button" aria-expanded="false" aria-controls="collapseExample">
+                               <span><i class="fas fa-wallet me-2"></i></span>
+                               <span>Invoice</span>
+                            </a>
+                        </li> -->
+                        <li>
+                            <a class="nav-link side-navbar-link px-3" href="/shipment/view-shipments" role="button" aria-expanded="false" aria-controls="collapseExample">
+                               <span><i class="fas fa-shipping-fast	me-2"></i></span>
+                               <span>Shipments</span>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a class="nav-link side-navbar-link px-3" data-bs-toggle="collapse" href="#collapseExample2a" role="button" aria-expanded="false" aria-controls="collapseExample2a">
+                               <span><i class="fas fa-users	me-2"></i></span>
+                               <span>Customers</span>
+                               <span class="right-icon-chevron-down ms-auto"><i class="fas fa-chevron-down"></i></span>
+                            </a>
+                            <div class="collapse" id="collapseExample2a">
+                            <div>
+                                <ul class="navbar-nav ps-3">
+                                    <li>
+                                        <a class="nav-link px-3" href="/admin/dashboard/visualization/link1">
+                                            <span><i class="fas fa-play-circle me-2"></i></span>
+                                            <span>Getting Started</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link px-3" href="/admin/dashboard/visualization/link2">
+                                            <span><i class="fas fa-list me-2"></i></span>
+                                            <span>Customer Listings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link px-3" href="/admin/dashboard/visualization/link3">
+                                            <span><i class="fas fa-info-circle me-2"></i></span>
+                                            <span>Customer Details</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li> -->
+                        <li class="my-3">
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <div class="text-secondary small fw-bold text-uppercase px-3">APPS</div>
+                        </li>
+                        <li>
+                            <a class="nav-link side-navbar-link px-3" href="#" role="button" aria-expanded="false" aria-controls="collapseExample">
+                               <span><i class="fas fa-chart-line me-2"></i></span>
+                               <span>Analytics</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="nav-link side-navbar-link px-3" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
+                               <span><i class="fab fa-rocketchat me-2"></i></span>
+                               <span>Chats</span>
+                               <!-- Push the fa-chevron-down icon to the right end with ms-auto-->
+                               <span class="right-icon-chevron-down ms-auto"><i class="fas fa-chevron-down"></i></span>
+                            </a>
+                            <div class="collapse" id="collapseExample2">
+                            <div>
+                                <ul class="navbar-nav ps-3">
+                                    <li>
+                                        <a class="nav-link px-3" href="#">
+                                            <span><i class="fas fa-user-friends me-2"></i></span>
+                                            <span>Private Chat</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link px-3" href="#">
+                                            <span><i class="fas fa-layer-group me-2"></i></span>
+                                            <span>Group Chat</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link px-3" href="#">
+                                            <span><i class="fab fa-snapchat-square me-2"></i></span>
+                                            <span>Drawer Chat</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <li>
+                                <a class="nav-link side-navbar-link px-3" href="#" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                   <span><i class="fas fa-folder me-2"></i></span>
+                                   <span>File Manager</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-link side-navbar-link px-3" href="#" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                   <span><i class="fas fa-project-diagram	me-2"></i></span>
+                                   <span>Projects</span>
+                                </a>
+                            </li>
+                        </li>
+                        <li class="my-3">
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <div class="text-secondary small fw-bold text-uppercase px-3">SETTINGS</div>
+                        </li>
+                        <li>
+                            <a class="nav-link side-navbar-link px-3" data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
+                                <span><i class="fas fa-cog me-2"></i></span>
+                                <span>System</span>
+                                <!-- Push the fa-chevron-down icon to the right end with ms-auto-->
+                                <span class="right-icon-chevron-down ms-auto"><i class="fas fa-chevron-down"></i></span>
+                             </a>
+                             <div class="collapse" id="collapseExample3">
+                            <div>
+                                <!-- <ul class="navbar-nav ps-3"> -->
+                                    <ul class="navbar-nav ps-3 mb-3">
+                                        <li>
+                                        <a class="nav-link px-3">
+                                            <span><i class="fas fa-book-open me-2"></i></span>
+                                            <span>Nested Link 1</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link px-3">
+                                            <span><i class="fas fa-book-open me-2"></i></span>
+                                            <span>Nested Link 2</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link px-3">
+                                            <span><i class="fas fa-book-open me-2"></i></span>
+                                            <span>Nested Link 3</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="nav-link side-navbar-link px-3" href="/user/dashboard/users" role="button" aria-expanded="false" aria-controls="collapseExample">
+                               <span><i class="fas fa-shield-alt me-2"></i></span>
+                               <span>Security</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link side-navbar-link px-3" href="/user/dashboard/users" role="button" aria-expanded="false" aria-controls="collapseExample">
+                               <span><i class="fas fa-wrench me-2"></i></span>
+                               <span>Preferences</span>
+                            </a>
+                        </li>
+                        <li class="my-3">
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <div class="text-secondary small fw-bold text-uppercase px-3">HELP</div>
+                        </li>
+                        <li>
+                            <a class="nav-link side-navbar-link px-3" href="/user/dashboard/users" role="button" aria-expanded="false" aria-controls="collapseExample">
+                               <span><i class="fas fa-question-circle me-2"></i></span>
+                               <span>FAQ</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link side-navbar-link px-3" href="/user/dashboard/users" role="button" aria-expanded="false" aria-controls="collapseExample">
+                               <span><i class="fas fa-file-alt	me-2"></i></span>
+                               <span>Documentations</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link side-navbar-link px-3" href="/user/dashboard/users" role="button" aria-expanded="false" aria-controls="collapseExample">
+                               <span><i class="fas fa-history me-2"></i></span>
+                               <span>Changelog v1.0.0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+          </div>
+          <!-- Side Navbar Offcanvas -->

@@ -1,0 +1,569 @@
+<%- include('./layout') %>
+  <!-- content -->
+  <!-- Note: Set this container as "container-fluid" so it spans the whole screen width when zoomed-in or out -->
+  <!-- To test the effect of the "container-fluid", remove the "fluid" and zoom-in the page to 25%-->
+  <div class="container-fluid dashboard-content-area mt-5 pt-3">
+    <!-- Breadcrumb -->
+    <nav class="my-4 ps-1" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="/admin/dashboard/shipments">Shipments</a></li>
+        <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-item-active">users(s)</li>
+      </ol>
+    </nav>
+    <!-- Breadcrumb -->
+     
+    <div class="row mt-5">
+      <!-- Tabs -->
+      <div class="col-12">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+              type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><span><i
+                  class="fas fa-shipping-fast me-2"></i></span>Shipment(s)</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+              type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><span><i
+                  class="fas fa-truck-loading me-2"></i></span>Update Shipment(s)
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
+              type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false"><span><i
+                  class="fas fa-plus me-2"></i></span>Create Shipment(s)
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane"
+              type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" disabled>Disabled
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <!-- Shipment(s) -->
+          <div class="tab-pane fade show active my-4" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+            tabindex="0">
+            <div class="container pt-3 px-0">
+              <!-- Top Card Shipment -->
+              <div class="row mb-5">
+                <!-- Left Card -->
+                <div class="col-sm-6">
+                  <div class="card mb-3 h-100">
+                    <div class="row g-0">
+                      <div class="col-md-4 pt-3">
+                        <canvas id="myPieChartLeft"></canvas>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card mb-4 h-100 border-0">
+                          <div class="card-header text-dark">
+                            <h6 class="card-title">Status Summary</h6>
+                          </div>
+                          <p class="card-text mt-3 ms-3">Overview of shipment statuses including Pending, Delivered, and
+                            In Transit packages.<br>
+                            It helps monitor operational flow at a glance.
+                          </p>
+                          <p class="card-text ms-3 mt-2"><small class="text-body-secondary">Last updated 3 mins
+                              ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Left Card end-->
+
+                <!-- Right Card -->
+                <div class="col-sm-6">
+                  <div class="card mb-4 h-100">
+                    <div class="card-header text-dark">
+                      <h6 class="card-title">Reported Shipments Overview</h6>
+                    </div>
+                    <div class="card-body">
+                      <!-- Damaged Shipments -->
+                      <div class="mb-1">
+                        <div class="d-flex justify-content-between">
+                          <small class="mb-1 text-muted">Damaged Shipments</small>
+                          <span>25%</span>
+                        </div>
+                        <div class="progress">
+                          <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                      <!-- Seized Shipments -->
+                      <div class="mb-0">
+                        <div class="d-flex justify-content-between">
+                          <small class="mb-1 text-muted">Seized Shipments</small>
+                          <span>50%</span>
+                        </div>
+                        <div class="progress">
+                          <div class="progress-bar bg-warning" role="progressbar" style="width: 50%;" aria-valuenow="50"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                      <!-- Stopped Shipments -->
+                      <div>
+                        <div class="d-flex justify-content-between">
+                          <small class="mb-1 text-muted">Stopped Shipments</small>
+                          <span>75%</span>
+                        </div>
+                        <div class="progress">
+                          <div class="progress-bar bg-info" role="progressbar" style="width: 75%;" aria-valuenow="75"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                      <p class="card-text mt-3"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Right Card end-->
+              </div>
+            </div>
+            <!-- Top Card Shipment end-->
+
+            <h6 class="ps-2 pt-3">RECORDS</h6>
+            <hr class="table-group-divider">
+            <!-- DataTable -->
+            <div class="row table-responsive">
+              <!-- <table id="example" class="table-striped table-bordered nowrap" style="width:100%"> -->
+              <table id="recordsTable" class="display compact" style="width:100%">
+                <thead class="bg-dark text-white">
+                  <tr>
+                    <th class="text-start">Sender</th>
+                    <th class="text-start">Reciever</th>
+                    <th class="text-start">Origin</th>
+                    <th class="text-start">Dest.</th>
+                    <th class="text-start">Tracking #.</th>
+                    <th class="text-start">Manage</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-start">Tiger Nixon</td>
+                    <td class="text-start">System Architect</td>
+                    <td class="text-start">Edinburgh</td>
+                    <td class="text-start">China</td>
+                    <td class="text-start">20110425</td>
+                    <td>
+                      <div class="d-flex">
+                        <a href="#"><span class="text-dark"><i class="fas fa-eye"></i></span></a>
+                        <!-- <a href="#"><span class="ms-3"><i class="fas fa-edit"></i></span> -->
+
+                        <a type="button" class="" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                          data-bs-whatever="@mdo"><span class="ms-3"><i class="fas fa-edit"></i></span></a>
+                        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Open modal for @mdo</button> -->
+                        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Open modal for @fat</button>
+                                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Open modal for @getbootstrap</button> -->
+                        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+                          aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Shipment with Tracking#:
+                                  12112121</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                  aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <form action="/" method="post">
+                                  <div class="mb-3">
+                                    <input type="hidden" name="_method" value="put">
+                                    <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                    <input type="text" class="form-control" id="recipient-name">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Message:</label>
+                                    <textarea class="form-control" id="message-text"></textarea>
+                                  </div>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary">Submit</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        </a>
+                        <a href="#"><span class="ms-3 text-danger"><i class="fas fa-trash-alt"></i></span></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-start">Tiger Nixon</td>
+                    <td class="text-start">System Architect</td>
+                    <td class="text-start">Edinburgh</td>
+                    <td class="text-start">China</td>
+                    <td class="text-start">20110425</td>
+                    <td>
+                      <div class="d-flex">
+                        <a href="#"><span class="text-dark"><i class="fas fa-eye"></i></span></a>
+                        <a href="#"><span class="ms-3"><i class="fas fa-edit"></i></span></a>
+                        <a href="#"><span class="ms-3 text-danger"><i class="fas fa-trash-alt"></i></span></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-start">Tiger Nixon</td>
+                    <td class="text-start">System Architect</td>
+                    <td class="text-start">Edinburgh</td>
+                    <td class="text-start">China</td>
+                    <td class="text-start">20110425</td>
+                    <td>
+                      <div class="d-flex">
+                        <a href="#"><span class="text-dark"><i class="fas fa-eye"></i></span></a>
+                        <a href="#"><span class="ms-3"><i class="fas fa-edit"></i></span></a>
+                        <a href="#"><span class="ms-3 text-danger"><i class="fas fa-trash-alt"></i></span></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-start">Tiger Nixon</td>
+                    <td class="text-start">System Architect</td>
+                    <td class="text-start">Edinburgh</td>
+                    <td class="text-start">China</td>
+                    <td class="text-start">20110425</td>
+                    <td>
+                      <div class="d-flex">
+                        <a href="#"><span class="text-dark"><i class="fas fa-eye"></i></span></a>
+                        <a href="#"><span class="ms-3"><i class="fas fa-edit"></i></span></a>
+                        <a href="#"><span class="ms-3 text-danger"><i class="fas fa-trash-alt"></i></span></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-start">Tiger Nixon</td>
+                    <td class="text-start">System Architect</td>
+                    <td class="text-start">Edinburgh</td>
+                    <td class="text-start">China</td>
+                    <td class="text-start">20110425</td>
+                    <td>
+                      <div class="d-flex">
+                        <a href="#"><span class="text-dark"><i class="fas fa-eye"></i></span></a>
+                        <a href="#"><span class="ms-3"><i class="fas fa-edit"></i></span></a>
+                        <a href="#"><span class="ms-3 text-danger"><i class="fas fa-trash-alt"></i></span></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-start">Tiger Nixon</td>
+                    <td class="text-start">System Architect</td>
+                    <td class="text-start">Edinburgh</td>
+                    <td class="text-start">China</td>
+                    <td class="text-start">20110425</td>
+                    <td>
+                      <div class="d-flex">
+                        <a href="#"><span class="text-dark"><i class="fas fa-eye"></i></span></a>
+                        <a href="#"><span class="ms-3"><i class="fas fa-edit"></i></span></a>
+                        <a href="#"><span class="ms-3 text-danger"><i class="fas fa-trash-alt"></i></span></a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- DataTable end -->
+          </div>
+          <!-- Shipment(s) end-->
+          <!-- Update Shipment(s) -->
+          <div class="tab-pane fade my-4" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
+            tabindex="0">
+            <div class="container update-shipment-container pt-3 px-0">
+              <div class="row table-responsive">
+                <!-- DataTable -->
+                <table id="recordsTableUpdateShipment" class="display compact" style="width:100%">
+                  <thead class="bg-dark text-white">
+                    <tr>
+                      <th class="text-start">Sender</th>
+                      <th class="text-start">Reciever</th>
+                      <th class="text-start">Origin</th>
+                      <th class="text-start">Dest.</th>
+                      <th class="text-start">Tracking #.</th>
+                      <th class="text-start">Update</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-start">Tiger Nixon</td>
+                      <td class="text-start">System Architect</td>
+                      <td class="text-start">Edinburgh</td>
+                      <td class="text-start">China</td>
+                      <td class="text-start">20110425</td>
+                      <td>
+                        <a type="button" class="" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                          data-bs-whatever="@mdo"><span class="ms-3"><i class="fas fa-edit"></i></span></a>
+                        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Open modal for @mdo</button> -->
+                        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Open modal for @fat</button>
+                                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Open modal for @getbootstrap</button> -->
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                          aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Shipment with Tracking#:
+                                  12112121</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                  aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <form action="/" method="post">
+                                  <div class="mb-3">
+                                    <input type="hidden" name="_method" value="put">
+                                    <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                    <input type="text" class="form-control" id="recipient-name">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Message:</label>
+                                    <textarea class="form-control" id="message-text"></textarea>
+                                  </div>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary">Submit</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-start">Tiger Nixon</td>
+                      <td class="text-start">System Architect</td>
+                      <td class="text-start">Edinburgh</td>
+                      <td class="text-start">China</td>
+                      <td class="text-start">20110425</td>
+                      <td>
+                        <a href="#"><span class="ms-3"><i class="fas fa-edit"></i></span></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-start">Tiger Nixon</td>
+                      <td class="text-start">System Architect</td>
+                      <td class="text-start">Edinburgh</td>
+                      <td class="text-start">China</td>
+                      <td class="text-start">20110425</td>
+                      <td>
+                        <a href="#"><span class="ms-3"><i class="fas fa-edit"></i></span></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-start">Tiger Nixon</td>
+                      <td class="text-start">System Architect</td>
+                      <td class="text-start">Edinburgh</td>
+                      <td class="text-start">China</td>
+                      <td class="text-start">20110425</td>
+                      <td>
+                        <a href="#"><span class="ms-3"><i class="fas fa-edit"></i></span></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-start">Tiger Nixon</td>
+                      <td class="text-start">System Architect</td>
+                      <td class="text-start">Edinburgh</td>
+                      <td class="text-start">China</td>
+                      <td class="text-start">20110425</td>
+                      <td>
+                        <a href="#"><span class="ms-3"><i class="fas fa-edit"></i></span></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-start">Tiger Nixon</td>
+                      <td class="text-start">System Architect</td>
+                      <td class="text-start">Edinburgh</td>
+                      <td class="text-start">China</td>
+                      <td class="text-start">20110425</td>
+                      <td>
+                        <a href="#"><span class="ms-3"><i class="fas fa-edit"></i></span></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- DataTable end -->
+              </div>
+            </div>
+          </div>
+          <!-- Update Shipment(s) end -->
+          <!-- Create Shipment(s) -->
+          <div class="tab-pane fade my-4" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab"
+            tabindex="0">
+            <div class="container update-shipment-container pt-1 px-0">
+              <!-- Feedback messages -->
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <!-- Feedback messages end -->
+              <!-- Create Shipment Form -->
+              <div class="container my-4">
+                <div class="row justify-content-start">
+                  <!-- Responsive: full width on small screens, limited width on larger devices -->
+                  <div class="col-12 col-md-8 col-lg-6">
+                    <div class="card shadow">
+                      <div class="card-header bg-primary text-white text-center">
+                        <h6 class="mb-0">Create Shipment</h6>
+                      </div>
+                      <div class="card-body">
+                        <form action="/shipments" method="POST" class="needs-validation" novalidate>
+                          <!-- Shipment Title -->
+                          <div class="mb-4">
+                            <label for="shipmentTitle" class="form-label ps-1">Shipment Title</label>
+                            <input type="text" class="form-control ps-1" id="shipmentTitle" name="shipmentTitle"
+                              placeholder="Enter shipment title" required>
+                            <div class="invalid-feedback">
+                              Please enter a shipment title.
+                            </div>
+                          </div>
+                          <!-- Sender & Receiver -->
+                          <div class="row">
+                            <div class="col-md-6 mb-4">
+                              <label for="sender" class="form-label ps-1">Sender</label>
+                              <input type="text" class="form-control ps-1" id="sender" name="sender"
+                                placeholder="Sender name" required>
+                              <div class="invalid-feedback">
+                                Please enter the sender name.
+                              </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                              <label for="receiver" class="form-label ps-1">Receiver</label>
+                              <input type="text" class="form-control ps-1" id="receiver" name="receiver"
+                                placeholder="Receiver name" required>
+                              <div class="invalid-feedback">
+                                Please enter the receiver name.
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Origin & Destination -->
+                          <div class="row">
+                            <div class="col-md-6 mb-4">
+                              <label for="origin" class="form-label ps-1">Origin</label>
+                              <input type="text" class="form-control ps-1" id="origin" name="origin"
+                                placeholder="Origin address" required>
+                              <div class="invalid-feedback">
+                                Please enter the origin address.
+                              </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                              <label for="destination" class="form-label ps-1">Destination</label>
+                              <input type="text" class="form-control ps-1" id="destination" name="destination"
+                                placeholder="Destination address" required>
+                              <div class="invalid-feedback">
+                                Please enter the destination address.
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Shipping & Arrival Dates -->
+                          <div class="row">
+                            <div class="col-md-6 mb-4">
+                              <label for="shippingDate" class="form-label ps-1">Shipping Date</label>
+                              <input type="date" class="form-control ps-1" id="shippingDate" name="shippingDate"
+                                required>
+                              <div class="invalid-feedback">
+                                Please select a shipping date.
+                              </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                              <label for="arrivalDate" class="form-label ps-1">Estimated Arrival Date</label>
+                              <input type="date" class="form-control ps-1" id="arrivalDate" name="arrivalDate" required>
+                              <div class="invalid-feedback">
+                                Please select an arrival date.
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Shipment Status -->
+                          <div class="mb-4">
+                            <label for="shipmentStatus" class="form-label ps-1">Shipment Status</label>
+                            <select class="form-select" id="shipmentStatus" name="shipmentStatus" required>
+                              <option value="">Select status...</option>
+                              <option value="collected">Collected</option>
+                              <option value="pending">Pending</option>
+                              <option value="in-transit">In Transit</option>
+                              <option value="delivered">Delivered</option>
+                              <option value="cancelled">Cancelled</option>
+                            </select>
+                            <div class="invalid-feedback">
+                              Please select a shipment status.
+                            </div>
+                          </div>
+                          <!-- Weight & Tracking Number -->
+                          <div class="row">
+                            <div class="col-md-6 mb-4">
+                              <label for="weight" class="form-label ps-1">Weight (kg)</label>
+                              <input type="number" step="0.1" class="form-control ps-1" id="weight" name="weight"
+                                placeholder="Shipment weight" required>
+                              <div class="invalid-feedback">
+                                Please enter the shipment weight.
+                              </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                              <label for="trackingNumber" class="form-label ps-1">Tracking Number</label>
+                              <input type="text" class="form-control ps-1" id="trackingNumber" name="trackingNumber"
+                                placeholder="Tracking number" required>
+                              <div class="invalid-feedback">
+                                Please enter the tracking number.
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Submit Button -->
+                          <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn">Submit</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Create Shipment(s) end -->
+          <!-- Disabled -->
+          <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
+            ...
+          </div>
+          <!-- Disabled end -->
+        </div>
+      </div>
+      <!-- Tabs end-->
+    </div>
+  </div>
+
+  <!-- BreadCrumbs -->
+  <script src="/js/breadCrumbs.js"></script>
+  <!-- BreadCrumbs -->
+  <!-- content -->
+
+  <!-- Charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/js/piechartLeft.js"></script>
+  <script src="/js/piechartRight.js"></script>
+  <script src="/js/modalSnippet.js"></script>
+  <script src="/js/modalSnippet1.js"></script>
+  <!-- Charts -->
+
+  <!-- Create Shipment Form Validation Script -->
+  <script>
+    (function () {
+      'use strict';
+      const forms = document.querySelectorAll('.needs-validation');
+      Array.from(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    })();
+  </script>
+  <!-- Create Shipment Form Validation Script end -->
+
+  <!--
+Note: For any added code in Tab having same dataTable,
+make sure to update the script section in below 
+./layout-footer.js to reference the table id.
+Else it wont work. 
+-->
+  <%- include('./layout-footer') %>

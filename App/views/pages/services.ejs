@@ -1,0 +1,133 @@
+<!-- HTML head-->
+<%- include('../partials/page-guard-head') %>
+<!-- HTML head ends here-->
+
+  <!-- Header starts here-->
+  <%- include('../partials/header') %>
+  <!-- Header ends here-->
+
+  <!-- Nav starts here -->
+  <%- include('../partials/nav') %> 
+  <!-- Nav ends here -->
+
+  <div class="container-fluid customer-service-container bg-body-tertiary">
+    <div class="row py-3">
+      <div class="col-sm-9" style="align-content: center;">
+        <h2 class="text-danger py-2">Customer Service</h2>
+        <h5 class="">
+          Your tracking number lets us find the right division contact to answer your questions.
+        </h5>
+        <div class="tracking py-4">
+          <form action="/shipment/track-shipment" class="d-flex" role="search">
+            <input class="form-control rounded-0" name="trackingNum" type="search" placeholder=" Enter your Tracking number(s) .." aria-label="Track shipment">
+            <button class="btn btn-outline-success rounded-0 px-4" type="submit">Track</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="row">
+          <div class="col-12 mb-3">
+            <div class="card">
+            <div class="card-body px-3 py-4">
+              <!-- <i class="fas fa-calendar-alt py-2"></i> -->
+              <h6 class="card-title py-1">Q-Ship Logistics for business <span style="color: red;"> > </span></h6>
+                <p class="card-text small-text text-dark">Shipping regularly? Request a business<br>account and profit from exclusive benefits</p>
+            </div>
+            </div>
+          </div>
+          <div class="col-12 mb-3">
+            <div class="card">
+            <div class="card-body px-3 py-4">
+              <!-- <i class="fas fa-calendar-alt py-2"></i> -->
+              <h6 class="card-title py-1">Do you suspect you received a fraudulent email?<span style="color: red;"> > </span></h6>
+              <p class="card-text small-text text-dark">Let us know.</p>
+            </div>
+            </div>
+          </div>
+          <div class="col-12 mb-3">
+            <div class="card">
+            <div class="card-body px-3 py-4">
+              <!-- <i class="fas fa-calendar-alt py-2"></i> -->
+              <h6 class="card-title py-1">Need more information? <span style="color: red;"> > </span></h6>
+              <p class="card-text small-text text-dark"> Contact customer service here.</p>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid my-4">
+    <div class="row">
+      <div class="col-8">
+        <h2 class="mb-3">Frequently asked questions</h2>
+        <hr class="mb-5">
+        <div class="accordion mb-3" id="accordionPanelsStayOpenExample">
+          <div class="accordion-item border-0">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+              <button class="accordion-button bg-body-tertiary px-1" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                <h5>What is tracking id and where can i find it?</h5>
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+              <div class="accordion-body">
+                <p><strong>A tracking number or ID</strong> 
+                  is a combination of numbers and possibly letters that uniquely identifies your shipment for national or international tracking.  
+                  Usually, the shipper or online shop is able to provide the tracking number or ID. If you have ordered a product in an online shop, the confirmation email or <span class="text-danger">shipment</span> tracking notification often contains the tracking number or ID. If not, please contact your shipper or online shop.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item border-0">
+            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+              <button class="accordion-button collapsed px-1" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                <h5>When will my tracking information appear?</h5>
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+              <div class="accordion-body">
+                <p><strong>Tracking events</strong> 
+                usually appear 24-48 hours after receiving the Track and Trace ID. In general, once the shipment has reached our facility, a tracking event will appear.              </div>
+            </div>
+          </div>
+          <div class="accordion-item border-0">
+            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+              <button class="accordion-button collapsed px-1" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                <h5>Why is my tracking number/ID not working?</h5>
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+              <div class="accordion-body">
+                <p>
+                  <strong>Tracking number/ID not working? </strong>Please make sure you entered the correct tracking number in the correct format: Check for minimum length of 5 characters, and if there are any special characters in your input. Tab, comma, space and semicolon are understood as separators between several tracking IDs.
+                  If your tracking ID is not working, please contact your shipper or online shop.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item border-0">
+            <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+              <button class="accordion-button collapsed px-1" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+                <h5>If I do not have my tracking number, is it still possible to track my shipment?</h5>
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+              <div class="accordion-body">
+                <p>
+                  However, if you have other shipping reference numbers, they may work using shipment tracking systems of the specific business unit in charge of the shipment.
+                  Its best to contact <span class="text-danger">customer service</span> for assistance. 
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <%- include('../partials/footer') %> 
+  <!-- Footer -->
+
+<!-- HTML tail-->
+<%- include('../partials/page-guard-tail') %>
+<!-- HTML tail ends here-->

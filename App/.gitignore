@@ -1,0 +1,4 @@
+node_modules
+views/pages/trash
+views/pages/admin-dashboard/trash
+views/pages/user-dashboard/trash
