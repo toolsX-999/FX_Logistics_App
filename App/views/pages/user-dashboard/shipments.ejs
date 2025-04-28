@@ -135,7 +135,7 @@
               <h6 class="ps-2 pt-3">NO RECORDS</h6>
             <% } %>
             
-            <% if (shipments.length > 0) { %>
+            <% if (Array.isArray(shipments) && shipments.length > 0) { %>
             <h6 class="ps-2 pt-3">RECORDS</h6>
             <hr class="table-group-divider">
             <!-- DataTable -->

@@ -10,12 +10,13 @@ const getShipments = async (req, res) => {
     const { activeTab, type } = req.query;
     try {
         const shipments = await Shipment.find();
+        console.log("In get shipment", shipments)
         if (shipments.length === 0 || !shipments) {
             console.log("No Shipment found");
             return res.render("pages/user-dashboard/shipments", {
-                type,
+                type: type || "Error",
                 activeTab: activeTab || "home-tab-pane",
-                shipments: ""
+                shipments: shipments || ""
             });
         }
         return res.render("pages/user-dashboard/shipments", {
