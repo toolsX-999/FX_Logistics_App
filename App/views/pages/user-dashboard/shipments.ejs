@@ -215,7 +215,46 @@
           <!-- Update Shipment(s) -->
           <div class="tab-pane fade my-4 <%= activeTab == 'profile-tab-pane'? 'show active' : ''%>" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
             tabindex="0">
-            <div class="container update-shipment-container px-0" style="margin-top: 150px;">
+            <!-- Success feedback card Based on PRG pattern-->
+            <% if (type === "updated" ) { %>
+              <div class="card shadow-sm mt-5 mx-auto" style="width: 50%;">
+                  <div class="card-header bg-primary text-white">
+                      <i class="fas fa-check-circle me-2"></i> Success
+                  </div>
+                  <div class="card-body text-center">
+                      <h6 class="card-title">🎉 Shipment Updated Successfully<h6>
+                              <p class="card-text text-muted">
+                                  Shipment has been updated
+                                  successfully.<br>
+                                  Would you like to <strong>view all Shipments</strong> or
+                                  <strong>update another shipment</strong>?
+                              </p>
+                              <a href="/shipment/view-shipments?activeTab=home-tab-pane"
+                                  class="btn btn-outline-primary me-2 mt-4">View
+                                  Shipment(s)</a>
+                              <a href="/shipment/view-shipments?activeTab=profile-tab-pane"
+                                  class="btn btn-outline-primary mt-4">Update Shipment</a>
+                  </div>
+                  <div class="card-footer text-muted small">
+                      <i class="far fa-clock me-1"></i>
+                      <%= new Date().toLocaleString() %>
+                  </div>
+              </div>
+              <% } %>
+            <!-- Success feedback card Based on PRG pattern end -->
+            <!-- Feedback messages -->
+            <% if (message && type==="Error" && block =="updateShipment") { %>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>
+                    <%= type %>:
+                </strong>
+                <%= message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% } %>
+          <!-- Feedback messages end -->
+            <% if (type !== "updated" ) { %>
+            <div class="container update-shipment-container px-0" style="margin-top: 100px;">
               <div class="row table-responsive">
                 <table id="recordsTableUpdateShipment" class="display compact" style="width:100%">
                   <thead class="bg-dark text-white">
@@ -266,12 +305,16 @@
                                         <input type="text" name="location" placeholder="Sample: H1B FL new port" class="form-control" id="location">
                                       </div>  
                                       <div class="mb-3">
-                                        <label for="status-message" class="col-form-label">Status Message:</label>
-                                        <textarea class="form-control" placeholder="Sample: Shipment is on the way" id="status-message"></textarea>
+                                        <label for="tag" class="col-form-label">Tag:</label>
+                                        <input type="text" name="tag" placeholder="Sample: OUT FOR DELIVERY" class="form-control" id="tag">
+                                      </div>  
+                                      <div class="mb-3">
+                                        <label for="statusMessage" class="col-form-label">Status Message:</label>
+                                        <textarea class="form-control" name="statusMessage" placeholder="Sample: Shipment is on the way" id="statusMessage"></textarea>
                                       </div>
                                       <div class="mb-3">
-                                        <label for="shipment-notification" class="col-form-label">Shipment Notification:</label>
-                                        <textarea class="form-control" name="shipment-notification" placeholder="Sample: Your shipment has been stopped by customs. Contact your agent .." id="shipment-notification"></textarea>
+                                        <label for="notification" class="col-form-label">Shipment Notification:</label>
+                                        <textarea class="form-control" name="notification" placeholder="Sample: Your shipment has been stopped by customs. Contact your agent .." id="notification"></textarea>
                                       </div>
                                       <!-- <label for="status" class="form-label ps-2">Shipment Status</label> -->
                                       <select class="form-select" id="status" name="status" required>
@@ -283,15 +326,11 @@
                                         <option value="Delievered">Delievered</option>
                                       </select>
                                       <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
                                       </div>    
                                     </form>
                                   </div>
-                                  <!-- <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                  </div> -->
                                 </div>
                               </div>
                             </div>
@@ -305,6 +344,7 @@
                 </table>
               </div>
             </div>
+            <% } %>
           </div>
           <!-- Update Shipment(s) end -->
 
@@ -316,9 +356,8 @@
             aria-labelledby="contact-tab"
             tabindex="0">
             <div class="container update-shipment-container pt-1 px-0">
-              
               <!-- Success feedback card Based on PRG pattern-->
-              <% if (type === "success" ) { %>
+              <% if (type === "created" ) { %>
                 <div class="card shadow-sm mt-4 mx-auto" style="width: 50%;">
                     <div class="card-header bg-primary text-white">
                         <i class="fas fa-check-circle me-2"></i> Success
@@ -344,21 +383,19 @@
                 </div>
                 <% } %>
               <!-- Success feedback card Based on PRG pattern end -->
-            
               <!-- Feedback messages -->
-              <% if (message && type==="Error" ) { %>
+              <% if (message && type==="Error" && block ==="createShipment") { %>
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>
                         <%= type %>:
                     </strong>
                     <%= message %>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
                 </div>
                 <% } %>
               <!-- Feedback messages end -->
-
               <!-- Create Shipment Form -->
-              <% if (type !=="success" ) { %>
+              <% if (type !=="created" ) { %>
               <div class="container my-3">
                 <div class="row justify-content-start">
                   <div class="col-lg-8 col-md-10 ps-0">
@@ -408,18 +445,27 @@
                           </div>
                           <!-- Origin and Destination -->
                           <div class="row">
-                            <div class="col-md-6 mb-4">
-                              <label for="origin" class="form-label ps-2">Origin</label>
-                              <input type="text" class="form-control" id="origin" name="origin"
-                                placeholder="Origin address" required>
+                            <div class="col-md-6 mb-4 select">
+                              <label for="origin" class="form-label ps-2">Origin Country</label>
+                              <select name="origin" class="form-select select-country" required>
+                                <option value="">Choose country code</option>
+                                <% countries.forEach(function(country) { %>
+                                  <option value="<%= country.code %>|<%= country.name %>"><%= country.name %></option>
+                                <% }); %>
+                              </select>                              
                               <div class="invalid-feedback">
                                 Please enter the origin address.
                               </div>
+
                             </div>
                             <div class="col-md-6 mb-4">
-                              <label for="destination" class="form-label ps-2">Destination</label>
-                              <input type="text" class="form-control" id="destination" name="destination"
-                                placeholder="Destination address" required>
+                              <label for="destination" class="form-label ps-2">Destination Country</label>
+                              <select name="destination" class="form-select select-country" required>
+                                <option value="">Choose country code</option>
+                                <% countries.forEach(function(country) { %>
+                                  <option value="<%= country.code %>|<%= country.name %>"><%= country.name %></option>
+                                <% }); %>
+                              </select>                              
                               <div class="invalid-feedback">
                                 Please enter the destination address.
                               </div>
@@ -443,20 +489,21 @@
                             </div>
                           </div>
                           <!-- Shipment Status -->
-                          <div class="mb-4">
+                          <div class="row">
+                            <div class="col-md-6 mb-4">
+                            <label for="invoiceNum" class="form-label ps-2">Invoice Number</label>
+                            <input type="text" class="form-control" id="invoiceNum" name="invoiceNum"
+                              placeholder="Invoice number">
+                            </div>
+                          <div class="col-md-6 mb-4">
                             <label for="status" class="form-label ps-2">Shipment Status</label>
                             <select class="form-select" id="status" name="status" required>
-                              <!-- <option value="">Select status...</option> -->
                               <option value="Collected">Collected</option>
-                              <!-- <option value="In Transit">In Transit</option>
-                              <option value="Siezed">Siezed</option>
-                              <option value="Stopped">Stopped</option>
-                              <option value="Damaged">Damaged</option>
-                              <option value="Delievered">Delievered</option> -->
                             </select>
                             <div class="invalid-feedback">
                               Please select a shipment status.
                             </div>
+                          </div>
                           </div>
                           <!-- Weight and Tracking Number -->
                           <div class="row">

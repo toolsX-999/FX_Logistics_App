@@ -6,6 +6,10 @@ const ShipmentSchema = mongoose.Schema({
     title: String, 
     sender: String,
     receiver: String,
+    invoiceNum: {
+      type: String,
+      default: "INV180425CA",
+    },
     origin: String, 
     destination: String, 
     shippingDate: Date, 
@@ -24,7 +28,6 @@ const ShipmentSchema = mongoose.Schema({
 
 const Shipment = mongoose.model("Shipment", ShipmentSchema);
 
-
 const UpdateShipmentSchema = mongoose.Schema({
   shipmentId: {type: Schema.Types.ObjectId, ref: 'Shipment'},
   currentDate: {
@@ -37,13 +40,18 @@ const UpdateShipmentSchema = mongoose.Schema({
   },
   location: String,
   statusMessage: String,
-  notification: String,
+  notification: {
+    type: String,
+    default: null,
+  },
+  tag: {
+    type: String,
+    default: "OUT FOR DELIVERY",
+  },
 },
 { timeStamps: true });
 
-
 const UpdateShipment = mongoose.model("UpdateShipment", UpdateShipmentSchema);
-
 module.exports = {
   Shipment,
   UpdateShipment,

@@ -303,7 +303,7 @@ header .text-icon:hover {
 }
 
 /* Customer service nav link */
-.customer-service-container, .ship-container, .n, .about-card-row-container {
+.customer-service-container, .ship-container, .quick-links, .about-card-row-container {
   margin-top: 100px;
   margin-bottom: 100px;
 }
@@ -344,3 +344,4 @@ header .text-icon:hover {
     /* margin-left: 12px */
   }
 }
+

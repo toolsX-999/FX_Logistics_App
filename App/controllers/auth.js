@@ -4,11 +4,15 @@ const util = require("util");
 bcrypt.compare = util.promisify(bcrypt.compare);
 
 const getUserLoginForm = async(req, res) => {
-    res.render("pages/user-dashboard/userLogin");
+    res.render("pages/user-dashboard/userLogin", {
+        message: "",
+    });
 }
 
 const getAdminLoginForm = async(req, res) => {
-    res.render("pages/admin-dashboard/adminLogin");
+    res.render("pages/admin-dashboard/adminLogin", {
+        message: "",
+    });
 }
 
 const loginUser = async(req, res) => {

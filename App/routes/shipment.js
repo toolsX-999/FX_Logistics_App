@@ -21,6 +21,8 @@ router.get("/view-shipments", getShipments);
 router.get("/track-shipment", trackShipment);
 // Create steady update records for shipment
 router.post("/update_shipment/:shipmentId", updateShipment);
+// Create steady update records for shipment
+// router.get("/update_shipment/:shipmentId", getUpdatedShipment);
 
 router.put("/edit_shipment/:id", editShipment);
 router.delete("/delete_shipment/:id", deleteShipment);

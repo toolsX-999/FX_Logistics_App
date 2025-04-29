@@ -3,7 +3,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const methodOverRide = require("method-override");
-const Shipment = require("./models/shipment");
+// const flash = require("connect-flash");
 const shipmentRouter = require("./routes/shipment");
 const authRouter = require("./routes/auth");
 const siteNavRouter = require("./routes/siteNav");
@@ -29,17 +29,19 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// Storing res session messages
-app.use((req, res, next) => {
-    res.locals.message = req.session.message;
-    delete req.session.message;
-    next();
-})
+// ===========================================
+// app.use(flash());
+// app.use((req, res, next) => {
+//     res.locals.message = req.flash('message');
+//     res.locals.type    = req.flash('type');
+//     next();
+//   });
+// ===========================================
 
+app.use("/", siteNavRouter);
 app.use("/shipment", shipmentRouter);
 app.use("/auth", authRouter);
-app.use("/admin", adminRouter);
 app.use("/user", userRouter);
-app.use("/", siteNavRouter);
+app.use("/admin", adminRouter);
 
 app.listen(PORT, () => console.log(`Server up and running on port-> ${PORT}`));

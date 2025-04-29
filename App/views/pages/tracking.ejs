@@ -28,7 +28,13 @@
     <div class="tracking-container container my-5 pb-5 border">
         <div class="tracking-caption row py-3 mb-4">
             <div>
-                <strong>Shipment with tracking number: <%= shipment.trackingNum %></strong>
+                <strong>Shipment with tracking number: <%= shipment.trackingNum %></strong><br>
+                <b class="text-muted">Invoice#: </b><small class="text-muted"><%= shipment.invoiceNum %></small><br>
+                <b class="text-muted">Sender : </b><small class="text-muted"><%= shipment.sender %></small> <br>
+                <b class="text-muted">Receiver: </b><small class="text-muted"><%= shipment.receiver %></small> <br>
+                <!-- <p>Sender</p>: <small>James Wang</small>
+                <p>Receiver</p>: <small>Evelyn Tu</small> -->
+
             </div>
         </div>
     
@@ -57,24 +63,22 @@
                 <div class="container">
                     <div class="row mb-4">
                         <div class="col-sm-3 d-flex align-items-center p-0 m-0">
-                            <% let countryCode1 = "us"; %>
-                            <img class="flag" src="https://flagcdn.com/32x24/<%= countryCode1.toLowerCase() %>.png" 
-                                 alt="<%= countryCode1 %> flag" class="me-1">
-                            <!-- <small class="text-uppercase"><%= countryCode1 %></small> -->
+                            <img class="flag" src="https://flagcdn.com/32x24/<%= originCountryCode.toLowerCase() %>.png" 
+                                 alt="<%= originCountryCode %> flag" class="me-1">
+                            <!-- <small class="text-uppercase"><%= originCountryCode %></small> -->
                         </div>
                         <div class="col-sm-2 p-0 m-0"><i class="fas fa-arrow-alt-circle-right p-0"></i></div>
 
                         <div class="col-sm-3 d-flex align-items-center p-0 m-0">
-                            <% let countryCode = "sg"; %>
-                            <img class="flag" src="https://flagcdn.com/32x24/<%= countryCode.toLowerCase() %>.png" 
-                                 alt="<%= countryCode %> flag" class="me-1">
-                            <!-- <small class="text-uppercase"><%= countryCode %></small> -->
+                            <img class="flag" src="https://flagcdn.com/32x24/<%= destinationCountryCode.toLowerCase() %>.png" 
+                                 alt="<%= destinationCountryCode %> flag" class="me-1">
+                            <!-- <small class="text-uppercase"><%= destinationCountryCode %></small> -->
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 p-0">
                             <small class="small-text d-inline-block px-0">
-                                <b>From:</b> <%= shipment.origin %> -> <%= shipment.destination %>
+                                <b>From:</b> <%= originCountry %> <span class="ms-2">-></span> <span class="ms-2"><%= destinationCountry %></span>
                             </small>
                             <!-- <%= shipment.status %> on <%= shipment.shippingDate.toLocaleString() %> -->
                             <small class="small-text"><% shipment.shippingDate.toLocaleString() %></small>
@@ -101,60 +105,49 @@
     
         <!-- Bottom Info Section starts here -->
         <!-- Contain the updateShipment schema data -->
-        <div class="tracking-info-bottom tracking-steps row mt-3 border-top">
-            <!-- Step Row 1 -->
-            <!-- <div class="row step-row mb-4 py-3">
-              <div class="col-12 col-md-4 stepper-column">
-                <div class="tracking-marker"></div>
-                <p class="small text-muted mb-1">Monday, February 7, 2022, 12:55 PM</p>
-                <p class="mb-0">PASIR GUDANG, MYS</p>
-              </div>
-              <div class="bottom-text col-12 col-md-8 p-0 px-sm-2 mt-3 mt-sm-0">
-                <h6 class="fw-bold"><i class="fas fa-check-circle me-1 text-success"></i>DELIVERED</h6>
-                <p>More details about the delivery.</p>
-              </div>
-            </div> -->
-            
-            <!-- Step Row 2 -->
-            <!-- <div class="row step-row mb-4 py-3">
-              <div class="col-12 col-md-4 stepper-column">
-                <div class="tracking-marker"></div>
-                <p class="small text-muted mb-1">Monday, February 7, 2022, 9:00 AM</p>
-                <p class="mb-0">PASIR GUDANG, MYS</p>
-              </div>
-              <div class="bottom-text col-12 col-md-8 p-0 px-sm-2 mt-3 mt-sm-0">
-                <h6 class="fw-bold">OUT FOR DELIVERY</h6>
-                <p>Shipment is on its way to the recipient.</p>
-                <div>
-                    <a tabindex="0" class="btn btn-sm btn-danger popover-dismiss position-relative" role="button"
-                    data-bs-toggle="popover" data-bs-trigger="focus" title="Shipment stopped!" 
-                    data-bs-content="Shipment has been stopped by customs. Contact your agent.">
-                    Urgent Attn Required<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
-                        1+
-                        <span class="visually-hidden">unread messages</span>
-                      </span>
-                  </a>
-                </div>
-                <script>
-                    var popover = new bootstrap.Popover(document.querySelector('.popover-dismiss'),{trigger: 'focus'})
-                </script>
-              </div>
-            </div> -->
-            
-            <!-- Step Row 3 -->
-            <div class="row step-row mb-4 py-3">
-                <div class="col-12 col-md-4 stepper-column">
-                  <div class="tracking-marker"></div>
-                  <p class="small text-muted mb-1">Monday, April 28, 2025, 2:00 PM</p>
-                  <p class="mb-0">FX office 123 CA</p>
-                </div>
-                <div class="bottom-text col-12 col-md-8 p-0 px-sm-2 mt-3 mt-sm-0">
-                  <h6 class="fw-bold">DEPARTED FROM FACILITY</h6>
-                  <p>Shipment left the sorting facility.</p>
-                </div>
-              </div>
+        <div class="tracking-info-bottom tracking-steps row mt-3 border-top">           
+            <!-- Shipment steps -->
+            <% if (Array.isArray(updatedShipment) && updatedShipment.length > 0) { %>
+                <% updatedShipment.forEach(update => { %>
+                    <div class="row step-row mb-4 py-3">
+                      <div class="col-12 col-md-4 stepper-column">
+                        <div class="tracking-marker"></div>
+                        <p class="small text-muted mb-1"><%= update.currentDate %></p>
+                        <p class="mb-0"><%= update.location %></p>
+                      </div>
+        
+                      <div class="bottom-text col-12 col-md-8 p-0 px-sm-2 mt-3 mt-sm-0">
+                        <h6 class="fw-bold">
+                            <% if (update.tag.toLowerCase() === 'delivered') { %>
+                                <h6 class="fw-bold"><i class="fas fa-check-circle me-1 text-success"></i><%= update.tag %></h6>
+                            <% } else { %>
+                                <%= update.tag %>
+                            <% } %>
+                        </h6>
+                        <p><%= update.statusMessage %></p>
+        
+                        <% if (update.notification) { %>
+                        <div>
+                            <a tabindex="0" class="btn btn-sm btn-danger popover-dismiss position-relative" role="button"
+                            data-bs-toggle="popover" data-bs-trigger="focus" title="Shipment stopped!" 
+                            data-bs-content="<%= update.notification %>">
+                            Urgent Attn Required
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                                1+
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                          </a>
+                        </div>
+                        <script>
+                            var popover = new bootstrap.Popover(document.querySelector('.popover-dismiss'),{trigger: 'focus'})
+                        </script>
+                        <% } %>
+                      </div>
+                    </div>
+                <% }) %>
+            <% } %>
           </div>
-        <!-- Contain the updateShipment schema data end -->
+        <!-- Shipment steps -->
         </div>
         <% } %>
     <!-- Tracking section ends here -->
