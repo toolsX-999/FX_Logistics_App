@@ -156,9 +156,9 @@ const countries = [
     { code: 'NG', name: 'Nigeria' },
     { code: 'NU', name: 'Niue' },
     { code: 'NF', name: 'Norfolk Isl.' },
-    { code: 'SG', name: 'Singapore' },
     { code: 'US', name: 'United States' },
-   { code: 'GB', name: 'United Kingdom' }
+    { code: 'GB', name: 'United Kingdom' },
+    { code: 'SG', name: 'Singapore' },
 ]
    
 const getShipments = async (req, res) => {
