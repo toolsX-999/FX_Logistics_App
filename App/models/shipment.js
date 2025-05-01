@@ -19,6 +19,7 @@ const ShipmentSchema = mongoose.Schema({
       type: String,
       default: "FX office 123 CA, USA"
     },
+    // Implement update for this in route (edit/update)
     status: {
       type: String,
       default: "Collected",
@@ -34,6 +35,7 @@ const UpdateShipmentSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   }, 
+  // Redundant and not needed. Later tweek and remove. Except have need for it
   status: {
     type: String,
     enum: ["Collected", "In Transit", "Siezed", "Stopped", "Damaged", "Delievered"]

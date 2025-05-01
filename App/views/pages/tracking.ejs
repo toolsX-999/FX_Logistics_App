@@ -78,9 +78,9 @@
                     <div class="row">
                         <div class="col-12 p-0">
                             <small class="small-text d-inline-block px-0">
-                                <b>From:</b> <%= originCountry %> <span class="ms-2">-></span> <span class="ms-2"><%= destinationCountry %></span>
+                                <b>From:</b><br>
+                                <%= originCountry %> <span class="ms-0">-></span> <span class="ms-0"><%= destinationCountry %></span>
                             </small>
-                            <!-- <%= shipment.status %> on <%= shipment.shippingDate.toLocaleString() %> -->
                             <small class="small-text"><% shipment.shippingDate.toLocaleString() %></small>
                         </div>
                     </div>
@@ -91,11 +91,11 @@
             <!-- Col 3 starts here -->
             <div class="col-12 col-md-4 mb-4">
                 <small class="small-text text-success d-inline-block px-0 py-1">
-                    <i class="fas fa-check-circle me-1"></i>
+                    <i class="fas fa-check-circle me-0"></i>
                     <%= shipment.status %> on <%= shipment.shippingDate.toLocaleString() %>
                 </small>
                 <small class="small-text d-inline-block px-0 pt-4">
-                    <b>Facility:</b> <%= shipment.facility %>
+                    <b>Facility:</b><br> <%= shipment.facility %>
                 </small>
             </div>
             <!-- Col 3 ends here -->
